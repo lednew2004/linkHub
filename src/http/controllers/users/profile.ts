@@ -9,7 +9,12 @@ export async function profile(request: FastifyRequest, reply: FastifyReply) {
     const { user } = await getUserProfileUseCase.execute({
       userId: request.user.sub,
     });
-    return reply.status(201).send({ user });
+    return reply.status(201).send({
+      user: {
+        ...user,
+        password_hash: undefined,
+      },
+    });
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(400).send({ message: err.message });
