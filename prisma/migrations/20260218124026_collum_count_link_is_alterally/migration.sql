@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Link" ALTER COLUMN "count" SET DEFAULT 0;
