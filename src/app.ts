@@ -5,6 +5,7 @@ import { usersRoutes } from "./http/controllers/users/routes";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
 import { linksRoutes } from "./http/controllers/links/routes";
+import cors from "@fastify/cors";
 
 export const app = fastify();
 
@@ -20,6 +21,10 @@ app.register(fastifyJwt, {
 });
 
 app.register(fastifyCookie);
+
+app.register(cors, {
+  origin: true, // Em produção, você trocaria true pela URL do seu site
+});
 
 app.register(usersRoutes);
 app.register(linksRoutes);
