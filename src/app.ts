@@ -20,8 +20,6 @@ app.register(fastifyJwt, {
   },
 });
 
-app.register(fastifyCookie);
-
 app.register(cors, {
   origin: true, // Em produção, você trocaria true pela URL do seu site
 });
