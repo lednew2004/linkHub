@@ -20,8 +20,12 @@ app.register(fastifyJwt, {
   },
 });
 
+app.register(fastifyCookie);
+
 app.register(cors, {
-  origin: true, // Em produção, você trocaria true pela URL do seu site
+  origin: "*", // Permite qualquer origem. Para produção, substitua pelo domínio do seu front.
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 });
 
 app.register(usersRoutes);
