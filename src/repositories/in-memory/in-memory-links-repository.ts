@@ -2,7 +2,6 @@ import { randomUUID } from "node:crypto";
 import type { LinkUncheckedCreateInput } from "../../../generated/prisma/models";
 import type { LinksRepository } from "../links-repository";
 import type { Link } from "../../../generated/prisma/client";
-import type { link } from "node:fs";
 
 export class InMemoryLinksRepository implements LinksRepository {
   public items: Link[] = [];
@@ -47,5 +46,29 @@ export class InMemoryLinksRepository implements LinksRepository {
     }
 
     return link;
+  }
+
+  async deleteLink(linkId: string) {
+    const itemIndex = this.items.findIndex((item) => item.id === linkId);
+
+    if (itemIndex < 0) {
+      return null;
+    }
+
+    const [deletedLink] = this.items.splice(itemIndex, 1);
+
+    return deletedLink ?? null;
+  }
+
+  async clickCountLink(linkId: string): Promise<Link> {
+    const itemIndex = this.items.findIndex((item) => item.id === linkId);
+
+    if (itemIndex < 0) {
+      throw new Error("Link not found");
+    }
+
+    this.items[itemIndex]!.count += 1;
+
+    return this.items[itemIndex]!;
   }
 }

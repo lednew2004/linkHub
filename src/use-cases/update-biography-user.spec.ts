@@ -20,6 +20,7 @@ describe("Update Biography use case", () => {
       userName: "johndoe123",
       biography: "example",
       password_hash: await hash("123456", 6),
+      role: "ADMIN",
     });
 
     const { user } = await sut.execute({

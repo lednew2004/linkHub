@@ -42,6 +42,29 @@ export class PrismaLinksRepository implements LinksRepository {
 
     return link;
   }
+
+  async deleteLink(linkId: string) {
+    const link = await prisma.link.delete({
+      where: {
+        id: linkId,
+      },
+    });
+
+    return link;
+  }
+
+  async clickCountLink(linkId: string) {
+    const link = await prisma.link.update({
+      where: {
+        id: linkId,
+      },
+      data: {
+        count: +1,
+      },
+    });
+
+    return link;
+  }
 }
 
 // lyzrkrZVlDTrbRPB
