@@ -23,9 +23,10 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie);
 
 app.register(cors, {
-  origin: "*", // Permite qualquer origem. Para produção, substitua pelo domínio do seu front.
+  origin: "https://link-hub-frontend.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Adicione isso se for usar cookies ou sessões futuramente
 });
 
 app.register(usersRoutes);
